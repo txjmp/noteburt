@@ -1,0 +1,41 @@
+#notice_div {
+  background-color:rgba(0,0,200,.9);
+  width:50%; height:100px; min-width:500px;
+  border-radius:10px; border:1px solid black;
+  position:absolute; top:20%; left:25%;
+  display:none; z-index:99;
+}
+#notice_text {
+  margin-top:30px;
+  color:black; font-size:1.3em;
+  text-align:center;
+  font-family:sans-serif;
+}
+#confirm_div {
+  background-color:rgba(0,0,200,.9);
+  width:50%; height:200px;
+  min-width:500px;
+  border-radius:10px; border:1px solid black;
+  position:absolute; top:20%; left:25%;
+  display:none; z-index:99;
+}
+#confirm_title {
+  color:white; font-size:1.4em; font-family:sans-serif;
+  text-align:center;
+}
+#confirm_text {
+  margin-top:15px;
+  color:white; font-size:1.2em; font-family:sans-serif;
+  text-align:center;
+}
+#confirm_btn_div {
+  width:280px; margin-top:40px;
+  margin-left:auto; margin-right:auto;
+}
+#confirm_btn_div button {
+  width:110px; margin-left:20px;
+  border-radius: 1px solid black;
+  font-size:1.2em; background:white, color:black;
+  padding:5px;
+}
+
