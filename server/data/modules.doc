@@ -1,0 +1,43 @@
++ addBook
++ addTab
++ addNote
++ positionNote
++ deleteNote
++ getTabNotes
++ changeTab
++ changeNote
++ getBookTabs
++ startup
+
+data.go
+  types: request, result, tabMap
+  vars: requestChan, sequentialid, bookMap, bookTabs
+  funcs: DataStartup, dataDispatch, getNextid
+--------------------
+db.go
+  types: bs []byte
+  vars: dbWriteChan, db, Zeroid
+  funcs: dbStart, dbWriteDispatch, dbWrite, bumpSequentialid,
+     []byte conversion funcs, open bkt funcs
+
+book.go
+  addBook
+
+tab.go
+  vars: tabPrevids
+  funcs: addTab, changeTab
+
+previd.go
+  types: previdMap
+  
+note.go
+  addNote
+  positionNote
+  changeNote
+  deleteNote
+
+ getbooktabs.go
+   getBookTabs
+
+ gettabnotes.go
+   getTabNotes
