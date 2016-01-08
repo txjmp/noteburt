@@ -17,8 +17,8 @@
     * design prevents subsequent data requests from waiting on db writes 
   * book.go, tab.go, note.go - data type def and processors for each data type
   * login.go - handles login, authentication
-  * previd.go - hanldes note ordering via a linked list
-    maintains the id of the note preceding each note (previd) in sorted order
-    the 1st note's previd value is the zeroid (all zeros value)
+  * previd.go - hanldes note ordering via a linked list  
+    maintains the id of the note preceding each note (previd) in sorted order  
+    the 1st note's previd value is the zeroid (all zeros value)  
   * getbooktabs.go, gettabnotes.go - each handles a specific request
- 4. schedule - process scheduled actions in separate goroutine  
+4. schedule - process scheduled actions in separate goroutine  
