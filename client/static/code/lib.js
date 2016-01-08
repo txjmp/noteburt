@@ -1,22 +1,22 @@
 // tag literals used in view defs, for convenience so tag names don't have to be enclosed in quotes
-var ztag = 'tag';
-var zlbl = 'label';
-var zinp = 'input';
-var zh1 = 'h1';
-var zh2 = 'h2';
-var zh3 = 'h3';
-var zdiv = 'div';
-var zp = 'p';
-var zimg = 'img';
-var zbtn = 'button';
-var zul = 'ul';
-var zol = 'ol';
-var zli = 'li';
-var zend = 'end';
-var zditto = 'ditto';  // means to copy input string as is
-var zbr = 'br';
-var zselect = 'select';
-var ztextarea = 'textarea';
+const ztag = 	'tag';
+const zlbl = 	'label';
+const zinp = 	'input';
+const zh1 = 	'h1';
+const zh2 = 	'h2';
+const zh3 = 	'h3';
+const zdiv = 	'div';
+const zp = 		'p';
+const zimg = 	'img';
+const zbtn = 	'button';
+const zul = 	'ul';
+const zol = 	'ol';
+const zli = 	'li';
+const zend = 	'end';
+const zditto = 	'ditto';  // means to copy input string as is
+const zbr = 	'br';
+const zselect = 'select';
+const ztextarea = 'textarea';
 
 var htmlCodes = {
 	id: 		"id",
