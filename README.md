@@ -7,4 +7,4 @@ There are 2 major components.
 1. Client Html5
 2. Server Go
 
-**See separate Readme files inside each component folder.
+##See separate Readme files inside each component folder.
