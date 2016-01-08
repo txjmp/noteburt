@@ -11,5 +11,14 @@
     * some pkg level data stores, used by various pkg funcs
     * request, result, processor (interface) type definitions
     * dataDispatch func which processes all data requests from the request channel
-
-  
+  * db.go
+    * database init, and starts dbWrite goroutine
+    * dbWrite func which processes all db write requests (posted by dataDispatch)
+    * design prevents subsequent data requests from waiting on db writes 
+  * book.go, tab.go, note.go - data type def and processors for each data type
+  * login.go - handles login, authentication
+  * previd.go - hanldes note ordering via a linked list
+    maintains the id of the note preceding each note (previd) in sorted order
+    the 1st note's previd value is the zeroid (all zeros value)
+  * getbooktabs.go, gettabnotes.go - each handles a specific request
+ 4. schedule - process scheduled actions in separate goroutine  
