@@ -20,15 +20,17 @@ type TestLoginResponse struct {
 	Bookid    string
 	BookName  string
 	Broadcast string
-	Tabs      map[string]*d.TabInfo
+	Tabs      map[string]*d.TabInfo // TabInfo defined in data/getbooktabs.go
 }
 type tabRequest struct {
 	TabNumber int
 	TabName   string
+	Hidden    bool
 }
 type TestTabRequest struct {
 	TabNumber int
 	TabName   string
+	Hidden    bool
 }
 type noteRequest struct {
 	Content  string

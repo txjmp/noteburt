@@ -4,8 +4,8 @@ function ViewTabMgr() {
 	this.html = [
 		zdiv, {id:"top_div", w:"100%", h:"50px", bbottom:"1px solid black"},
 		zh2, {id:"book_name", text:"Notebook Name", w:"70%", flt:"left",
-			f:"600 1.2em muli, sans-serif", 
-			mleft:"30px", mtop:"15px", end:"tag"},
+			f:HeadFont, c:HeadColor,
+			mleft:"30px", mtop:"10px", end:"tag"},
 		zbtn, {id:"close_btn", text:"Close", flt:"right", m:"8px", end:"tag"},
 		zend, zdiv,
 
@@ -23,11 +23,12 @@ function ViewTabMgr() {
 			mtop:"20px", end:"tag"},
 		zlbl, {text:"Tab Number", end:"tag"},
 		zinp, {id:"tab_number", typ:"text", w:"50px", mright:"100px", textalign:"center"},
-		zbr,
 		zlbl, {text:"Tab Name", end:"tag"},
-		zinp, {id:"tab_name", typ:"text", w:"240px", pleft:"10px"},
+		zinp, {id:"tab_name", typ:"text", w:"240px", pleft:"10px", end:"tag"},
+		zlbl, {text:"Hidden", end:"tag"},
+		zinp, {id:"hidden", typ:"checkbox", mright:"100px",},
 		zbtn, {id:"save_btn", text:"Save New Tab", val:"new",
-			w:"50%", mleft:"25%", mtop:"40px", end:"tag"},
+			w:"50%", mleft:"25%", mtop:"30px", end:"tag"},
 		zend, zdiv,
 	];
 	this.css = [
@@ -79,6 +80,7 @@ function ViewTabMgr() {
 		$(this.id + " #tab_number").val("");
 		$(this.id + " #tab_name").val("");
 		$(this.id + " #save_btn").val("new");
+		$(this.id + " #hidden").prop("checked",false);
 
 		$(this.id).show();
 	}
@@ -92,6 +94,8 @@ function ViewTabMgr() {
 		tabOrder.forEach(function(id) {
 			tab = DataTabs[id];
 			optText = tab.tabNumber + " " + tab.tabName;
+			if(tab.hidden) 
+				optText = '(x)' + optText;
 			html += '<option value="' + id + '">' + optText + '</option>\n'; 
 		});
 		selectTab.html(html);
@@ -106,6 +110,7 @@ function ViewTabMgr() {
 				$(viewid + " #tab_number").val("");
 				$(viewid + " #tab_name").val("");
 				$(viewid + " #save_btn").val("new");
+				$(viewid + " #hidden").prop("checked", false);
 				$(viewid + " #select_tab").attr("disabled",true);
 			} else if(Object.keys(DataTabs).length > 0) {
 				var tabid = $(viewid + " #select_tab").val();
@@ -114,6 +119,7 @@ function ViewTabMgr() {
 				$(viewid + " #save_btn").val("change");
 				$(viewid + " #tab_number").val(DataTabs[tabid].tabNumber);
 				$(viewid + " #tab_name").val(DataTabs[tabid].tabName);
+				$(viewid + " #hidden").prop("checked", DataTabs[tabid].hidden);
 				$(viewid + " #select_tab").attr("disabled",false);
 			}
 		});
@@ -123,6 +129,7 @@ function ViewTabMgr() {
 			var tabid = $(this).val();
 			$(viewid + " #tab_number").val(DataTabs[tabid].tabNumber);
 			$(viewid + " #tab_name").val(DataTabs[tabid].tabName);
+			$(viewid + " #hidden").prop("checked", DataTabs[tabid].hidden);
 		});
 		$(viewid + " #save_btn").click(function(e) {
 			var saveMode = $(e.target).val();
@@ -146,8 +153,9 @@ function ViewTabMgr() {
 			return;
 		}
 		var requestData = {
-			TabNumber: parseInt(tabNumber),
-			TabName: tabName
+			TabNumber: 	parseInt(tabNumber),
+			TabName: 	tabName,
+			Hidden:		$(viewid + " #hidden").prop("checked")
 		}
 		var path, httpMethod, tabid;
 		if(saveMode == "new") {
@@ -170,7 +178,11 @@ function ViewTabMgr() {
 				if(httpMethod == "POST") {  // for new tab, otherwise tabid is set above where saveMode != "new"
 					tabid = response;
 				} 
-				DataTabs[tabid] = {"tabNumber":requestData.TabNumber, "tabName":requestData.TabName};
+				DataTabs[tabid] = {
+					"tabNumber":requestData.TabNumber,
+					"tabName":	requestData.TabName,
+					"hidden":	requestData.Hidden
+				};
 				Notice("Tab Update Successful");
 			})
 			.fail(function(xhr) {

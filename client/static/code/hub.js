@@ -41,6 +41,7 @@ Hub.viewNoteEditClose = function() {
 	Views.bookTabs.display(REFRESH);
 }
 Hub.viewBookTabs_NoteburtClicked = function() {
+	if( DirectOpen ) return;  // see main.js for explanation
 	DataTabid = undefined;
 	DataNoteid = undefined;
 	$(Views.bookTabs.id).hide();

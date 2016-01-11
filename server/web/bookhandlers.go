@@ -32,6 +32,7 @@ func createBook(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		Bookid:    book.Id,
 		TabNumber: 1,
 		TabName:   "About",
+		Hidden:    false,
 	}
 	resultChan = d.Data("addTab", tab)
 	result = <-resultChan

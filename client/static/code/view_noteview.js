@@ -1,13 +1,13 @@
 function ViewNoteView() {
 	this.id = "#view_noteview";
 	this.html = [
-		zdiv, {id:"top_div", w:"100%", flt:"left", bkg:Green1, mbottom:"0px",
+		zdiv, {id:"top_div", w:"100%", flt:"left", bkg:HeadBkg, mbottom:"0px",
 			pad:"10px", b:"1px solid black", end:">"},
 		zlbl, {id:"noteburt", text:"NoteBurt", flt:"left", 
-			f:"1.5em AlphaSlabOne", c:"white", textshadow:"1px 1px 2px black",
+			f:"1.5em " + LogoFont, c:"white", textshadow:"1px 1px 2px black",
 			mleft:"10px", end:"tag"}, 
 		zlbl, {id:"tab_name", text:"No Tab Selected", flt:"left",
-			f:"600 1.5em dosis, sans-serif", c:"navy",
+			f:HeadFont, c:HeadColor,
 			mleft:"30px", pright:"15px", end:"tag"},
 		zlbl, {id:"note_title", flt:"left",
 			f:"600 1.5em dosis, sans-serif", c:"navy",

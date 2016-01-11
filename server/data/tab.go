@@ -14,6 +14,7 @@ type Tab struct {
 	Bookid         string
 	TabNumber      int
 	TabName        string
+	Hidden         bool
 	LastAccessTime time.Time // updated on any access (read,write) to any note in tab
 	ETag           string    // updated on any change to a note
 }
@@ -75,6 +76,7 @@ func (this *Tab) process(action string, resultChan chan Result) {
 		}
 		tab.TabName = this.TabName
 		tab.TabNumber = this.TabNumber
+		tab.Hidden = this.Hidden
 		tab.LastAccessTime = time.Now()
 		tab.ETag = fmt.Sprint(time.Now().UnixNano())
 		dbWrite("saveTabChange", this, resultChan) // save Tab to db

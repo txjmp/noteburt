@@ -8,9 +8,10 @@ import (
 	"time"
 )
 
-type TabInfo struct {
+type TabInfo struct { // tab data sent back to client
 	TabNumber int
 	TabName   string
+	Hidden    bool
 }
 type GetBookTabs struct {
 	Bookid     string
@@ -24,7 +25,7 @@ func (this *GetBookTabs) process(action string, resultChan chan Result) {
 	}
 	this.TabInfoMap = make(map[string]*TabInfo)
 	for tabid, tab := range bookTabs[this.Bookid] {
-		this.TabInfoMap[tabid] = &TabInfo{tab.TabNumber, tab.TabName}
+		this.TabInfoMap[tabid] = &TabInfo{tab.TabNumber, tab.TabName, tab.Hidden}
 	}
 	resultChan <- Result{DataOk, nil}
 }

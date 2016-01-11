@@ -27,9 +27,9 @@ type Result struct {
 	Val    interface{}
 }
 
-var bookMap map[string]*Book // contains 1 entry for each book in db
+var bookMap map[string]*Book // contains 1 entry for each book in db, key=bookid
 
-type tabMap map[string]*Tab    // key = tabid, each instance contains all tabs for a book
+type tabMap map[string]*Tab    // key = tabid, each tabMap contains all tabs for a book
 var bookTabs map[string]tabMap // key = bookid
 
 // sequentialid - used for recid for all rec types, converted to 12 digit string

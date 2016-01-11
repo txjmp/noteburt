@@ -29,6 +29,7 @@ func addTab(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		Bookid:    bookid,
 		TabNumber: request.TabNumber,
 		TabName:   request.TabName,
+		Hidden:    request.Hidden,
 	}
 	resultChan = d.Data("addTab", tab)
 	result = <-resultChan
@@ -59,6 +60,7 @@ func changeTab(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		Bookid:    bookid,
 		TabNumber: request.TabNumber,
 		TabName:   request.TabName,
+		Hidden:    request.Hidden,
 	}
 	resultChan = d.Data("changeTab", tab)
 	result = <-resultChan

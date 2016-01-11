@@ -165,13 +165,14 @@ func gzipCodeJS() {
 		"main.js",
 		"hub.js",
 		"data.js",
-		"screen1.js",
+		"lib.js",
+		"style.js",
+		"view_screen1.js",
 		"view_booktabs.js",
 		"view_noteedit.js",
 		"view_noteview.js",
 		"view_tabmgr.js",
 		"view_position.js",
-		"lib.js",
 	}
 	var fileIn *os.File
 	for _, fileName := range files {

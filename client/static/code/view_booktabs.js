@@ -2,16 +2,16 @@ var noteListFont = "600 1.2em muli, sans-serif";
 function ViewBookTabs() {
 	this.id = "#view_booktabs";
 	this.html = [
-		zdiv, {id:"top_div", w:"100%", flt:"left", bkg:Green1, mbottom:"0px",
-			pad:"10px", b:"1px solid black", end:">"},
+		zdiv, {id:"top_div", w:"100%", flt:"left", bkg:HeadBkg, mbottom:"0px",
+			pad:"10px", b:"1px solid black"},
 		zlbl, {id:"noteburt", text:"NoteBurt", flt:"left", 
-			f:"1.6em AlphaSlabOne",	c:"white", textshadow:"1px 1px 2px black",
+			f:"1.6em " + LogoFont,	c:"white", textshadow:"1px 1px 2px black",
 			mleft:"45px", end:"tag"},
 		zlbl, {id:"notebook_name", bright:"3px solid black", flt:"left",
-			f:"600 1.5em dosis, sans-serif", c:"navy",
+			f:HeadFont, c:HeadColor,
 			pright:"20px", mleft:"80px", end:"tag"},
 		zlbl, {id:"tab_name", text:"No Tab Selected", flt:"left",
-			f:"600 1.5em dosis, sans-serif", c:"navy",
+			f:HeadFont, c:HeadColor,
 			pleft:"20px", end:"tag"},
 		zend, zdiv,
 	// ------------------------------------------------------------------------  
@@ -33,7 +33,7 @@ function ViewBookTabs() {
 		zend, zdiv,  // end tab_div
 
 		// right side of screen containing note list for selected tab
-		zdiv, {id:"notelist_div", w:"400px", h:"95%", flt:"left", m:"15px", overflow:"auto", end:"tag"},
+		zdiv, {id:"notelist_div", w:"500px", h:"95%", flt:"left", m:"15px", overflow:"auto", end:"tag"},
 		//  ... note list items inserted here by display method
 	]
 
@@ -47,7 +47,8 @@ function ViewBookTabs() {
 		var html = GenHtml(this.html);
 		$(this.id).html(html);
 
-		$(this.id + " #noteburt").css("cursor", "pointer");  // logo is btn
+		if(!DirectOpen)
+			$(this.id + " #noteburt").css("cursor", "pointer");  // logo is btn
 
 		this.events();
 
@@ -55,8 +56,8 @@ function ViewBookTabs() {
 		var shortCss = [
 			{ selector: ".tab_btn", 
 			  settings:{ f:BaseFont, c:"black", w:"240px",
-			  pad:"10px", b:"none", btop:"1px solid black",
-			  mbottom:"0px", textalign:"left"}
+			  pad:"10px", b:"none", bbottom:"1px solid black",
+			  mbottom:"-5px", textalign:"left"}
 			}
 		]
 		this.cssTabBtn = GenCss(shortCss);
@@ -64,9 +65,8 @@ function ViewBookTabs() {
 		// css for class .notelist_item, to be applied when elements are reloaded
 		shortCss = [
 			{ selector: ".notelist_item", 
-			  settings:{ f:noteListFont, mtop:"7px", w:"95%",
-			  c:'black',
-			  textalign:"left", flt:"left", bkg:"transparent", b:"none"}
+			  settings:{ f:noteListFont, mtop:"7px", w:"95%", c:'black', bkg:"transparent",
+			  textalign:"left", flt:"left", b:"none"}
 			},
 		]
 		this.cssNoteListItem = GenCss(shortCss);
@@ -117,6 +117,8 @@ function ViewBookTabs() {
 		});
 		tabOrder.forEach(function(id) {
 			tab = DataTabs[id];
+			if(tab.hidden)
+				return;
 			if( tab.tabNumber < 10 )
 				tabText = "0" + tab.tabNumber + " " + tab.tabName;
 			else

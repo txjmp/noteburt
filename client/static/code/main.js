@@ -1,21 +1,10 @@
 var UrlPrefix;  // set in main() func, used for all ajax calls
+var DirectOpen;  // see comments below
 
 var OpenMode;
 const EditMode = 1;
 const ViewMode = 2;
 const CreateMode = 3;
-
-// global css values
-var Green1 = "#118C4E";
-var Orange1 = "#FF9009";
-var Tan1 = "#F3FAB6";
-var Gray1 = "#BCBCA7";    //585858
-
-var NoteWidth = "1200px"; // used in editview, noteview
-
-var BaseFont = "600 1.1em muli, sans-serif";
-var NoteFont = "600 1.1em muli, sans-serif";
-var MonoFont = "normal 1em consolas, monospace";
 
 var WinHeight = 0;
 var WinWidth = 0;
@@ -32,6 +21,11 @@ function main() {
 		UrlPrefix = UrlPrefix.substring(0, urlIndexOfBook);
 	}
 	console.log(UrlPrefix);
+	
+	if(LoadBookName == "BOOK_NAME")
+		DirectOpen = false; 
+	else
+		DirectOpen = true;  // prevents user from accessing screen1, opens book directly
 
 	WinHeight = $(window).height();
 	WinWidth = $(window).width();
@@ -50,11 +44,12 @@ function main() {
 		console.log(view + " view build run");
 	}	
 	$(".view").hide();
+
 	Views.screen1.display();
 }
 
 function trace(msg) {
-  //console.log(msg);
+  console.log(msg);
 }
 
 var lastBroadcast = "";

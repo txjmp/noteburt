@@ -3,7 +3,7 @@ function ViewPosition() {
 	this.html = [
 		zdiv, {id:"top_div", w:"100%", h:"50px", bbottom:"1px solid black", flt:"left"},
 		zh2, {id:"note_title", text:"Note Title Here", w:"70%", flt:"left",
-			f:"600 1.2em muli, sans-serif", c:"black",
+			f:HeadFont, c:HeadColor,
 			mleft:"20px", mtop:"12px", end:"tag"},
 		zbtn, {id:"close_btn", text:"Close", flt:"right", m:"8px", end:"tag"},
 		zend, zdiv,
@@ -95,8 +95,6 @@ function ViewPosition() {
 		DataDeletePrevid(DataNoteid);		// changes previd of note following this note
 		DataAddPrevid(DataNoteid, previd);
 		DataBuildNoteOrder();
-
-		if( NoServerTesting ) return;
 
 		var requestData = {
 			Previd: previd,

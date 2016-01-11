@@ -3,7 +3,7 @@ function ViewScreen1() {
 	this.html = [
 		zdiv, {id:"div1", w:"100%", h:"200px", flt:"left"},
 		zh1, {text:"NoteBurt", flt:"left", mleft:"30px",
-			f:"5em AlphaSlabOne", c:"white", textshadow:"3px 3px 5px black",
+			f:"5em " + LogoFont, c:"white", textshadow:"3px 3px 5px black",
 			end:"tag"},
 		zlbl, {id:"release", text:"Test Version",
 			f:BaseFont, c:"red", textshadow:"1px 1px 2px black",
@@ -94,17 +94,14 @@ function ViewScreen1() {
 		ApplyCss(this.id, css);
 
 		this.events();
-		
-		if(LoadBookName != "BOOK_NAME") {  // user specified book in url
-			$(this.id + " .input_div").hide();
-			$(this.id + " #view_div").show();
-			OpenMode = ViewMode;  // set global
-			$(this.id + " #view_nb_name").val(LoadBookName);
-			$(this.id + " #view_btn").css("background-color", "white");
-			$(this.id + " #view_btn").css("color", "black");		
-		}
 	}
 	this.display = function() {
+		if(DirectOpen) {  // DirectOpen defined in main.js, if true: user specified book in url
+			OpenMode = ViewMode;  // set global
+			$(this.id + " #view_nb_name").val(LoadBookName);
+			this.login();
+			return;
+		}
 		$("body").css("background", Green1);
 		$(this.id).show();
 	}
@@ -140,9 +137,11 @@ function ViewScreen1() {
 			thisView.getAccessCode($(viewid + " #create_access_code"));
 		});
 		$(viewid + " .open_btn").click(function() {
-			if( OpenMode == CreateMode )
-				Confirm( "Reminder","Please Record Notebook Name & Access Code Before Opening", function() { login() } );
-			else
+			if( OpenMode == CreateMode ) {
+				Confirm( "Reminder","Please Record Notebook Name & Access Code Before Opening", function() {
+					thisView.login();
+				});
+			} else
 				thisView.login();
 		}); 
 	}
@@ -213,14 +212,14 @@ function ViewScreen1() {
 		DataBookid = response.Bookid;
 		DataBookName = response.BookName;
 		DataTabs = {};
-		
-		var tabNumber, tabName;
+		var tabNumber, tabName, hidden;
 		trace("login response tabs");
 		for(tabid in response.Tabs) {
 			tabNumber = response.Tabs[tabid].TabNumber;
 			tabName = response.Tabs[tabid].TabName;
-			trace(tabNumber + " " + tabName);
-			DataTabs[tabid] = {"tabNumber":tabNumber, "tabName":tabName};
+			hidden = response.Tabs[tabid].Hidden;
+			trace(tabNumber + " " + tabName + " " + hidden);
+			DataTabs[tabid] = {"tabNumber":tabNumber, "tabName":tabName, "hidden":hidden};
 		}
 		if(OpenMode == CreateMode)
 			OpenMode = EditMode;
